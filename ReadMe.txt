@@ -1,7 +1,3 @@
-Sam Kemp
-is a fag
-lol
-rofl
-Change 20
-Change 50
-Change 60
+GitHub Push test
+
+--> this line is pushed from local to remote repo.
