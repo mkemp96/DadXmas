@@ -13,7 +13,7 @@ class window():
        # table.setRowCount(4)
        # table.setColumnCount(4)
         b.setText('Add A Driver')
-        l.setText('Sam loves cock')
+        l.setText('Matt licks gooch')
         w.setWindowTitle('Sam is a faggot')
         b.move(100,50)
         w.setGeometry(500,250,500,300)
@@ -30,7 +30,6 @@ class window():
                 btn.move(400,200)
                 self.show
 
-                
+
 
 window()
-			

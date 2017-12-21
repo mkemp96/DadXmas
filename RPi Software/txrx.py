@@ -39,4 +39,4 @@ class TxRx:
         try:
             client.send(message)
         except OSError:
-            
+            print("Failed to send to: ", self.client)
