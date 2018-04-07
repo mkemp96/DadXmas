@@ -17,34 +17,35 @@ class TxRx:
         self.sock.listen(5)
         while True:
             self.client, self.address = self.sock.accept()
-            client.settimeout(60)
-            threading.Thread(target = self.listenToClient,args = (client,address, gpio)).start()
+            self.client.settimeout(60)
+            threading.Thread(target = self.listenToClient,args = (self.client, self.address, gpio)).start()
 
     def listenToClient(self, client, address, gpio):
         while True:
             try:
                 data = client.recv(self.buff)
                 #Check for priming request from client and send response
-                if data=='pr':
+                if data==b'pr':
                     # Set the response to echo back the recieved data
                     #state = gpio.get_state(gpio.ir_pin)
                     state = 1
                     if state == 1:
-                        response = 'r'
+                        response = b'r'
                     else:
-                        repsonse = 'b'
+                        repsonse = b'b'
                     client.send(response)
                 else:
-                    raise error('Client disconnected')
-            except:
+                    raise OSError('Client disconnected')
+            except OSError as e:
+                print("Closing connection due to error: ", e)
                 client.close()
                 return False
 
     def sendToClient(self, message):
         try:
             self.client.send(message)
-        except OSError:
-            print("Failed to send to: ", self.client)
+        except OSError as e:
+            print("Failed to send to: ", self.client, " due to error: ", e)
 
     def close_all(self):
         self.client.close()
