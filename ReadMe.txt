@@ -1,3 +1,4 @@
-GitHub Push test
+Pi IP: 192.168.1.1
+Pi Login: ssh pi@192.168.1.1 pass: raspberry
 
---> this line is pushed from local to remote repo.
+Pi WiFi: Pi_Timing_Box autotest1952

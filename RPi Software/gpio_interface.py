@@ -1,23 +1,26 @@
 from datetime import datetime
 import RPi.GPIO as GPIO
+import time
 
 
 class GPIO_interface:
     def __init__(self, comms):
         self.txrx = comms
-        GPIO.setwarning(False)
+        GPIO.setwarnings(False)
         GPIO.setmode(GPIO.BCM)
-        self.ir_pin = 23
-        GPIO.setup(self.ir_pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+        self.ir_pin = 26
+        GPIO.setup(self.ir_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
     def event_detector(self):
-        GPIO.add_event_detect(self.ir_pin, GPIO.falling, callback=triggered)
+        GPIO.add_event_detect(self.ir_pin, GPIO.FALLING, callback=self.triggered, bouncetime =2000)
 
 
-    def triggered(self):
+    def triggered(self, pin):
+        print(pin)
         message = str(datetime.now()) + ":   " + " Sensor triggered"
         self.txrx.sendToClient(message)
         print("Sensor detected object!")
+        time.sleep(0.5)
 
 
     def get_state(self, pin):
