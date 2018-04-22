@@ -1,0 +1,55 @@
+Message Protocal
+
+- All messages end with '@'
+
+From Pi:
+
+Situation    |  Message
+
+Gate A broken: 	a_01:0@    	- Gate A + Attempt No. + time (0 milliseconds) + message end (@)
+Gate B broken:  b_01:time@ 	- Gate B + Attempt No. + time (x milliseconds) + message end (@)
+
+Error on
+Pi end:         e@    
+
+responding
+to laptop
+ready check
+ (READY):       r@
+
+responding
+to laptop
+ready check
+(NOT READY):   	n@
+
+responding
+to laptop
+test check
+(received):	testpass@
+
+-------------------------------------------------------
+
+From Laptop:
+
+Check Pi 
+is ready:	init@
+
+acknowledge
+message
+received:	ack@
+
+Error:		e@
+
+Tell Pi to
+reset gates:	resetgate@
+
+Tell Pi to
+reset program:	resetpi@
+
+Manual
+connection
+test:		test@
+
+
+
+			
