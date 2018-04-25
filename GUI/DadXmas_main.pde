@@ -15,7 +15,7 @@ String val;
 
 import g4p_controls.*;
 
-
+ int threadCount;
 
 Table mainTable;
 int rectX, rectY, rectSize;
@@ -36,12 +36,15 @@ void settings(){
 void setup(){
   createGUI(); 
   window1.close();
-
+  
   primed = false;
   gateBreak = 0;
   displayTime = 0;
 
   oldMillis= millis();
+  
+  
+
  
  //customGUI();
  
@@ -74,6 +77,8 @@ void setup(){
   println("Client: " + client.active());
 
   pingMillis1 = millis();
+  
+  thread("checkConnection");
 }
 
 
@@ -293,5 +298,30 @@ public void buildNewDriver(){
   Cancel.setLocalColorScheme(GCScheme.RED_SCHEME);
   Cancel.addEventHandler(this, "Cancel_Driver_Details");
   window1.loop();
+  
+}
+
+void checkConnection(){
+  
+threadCount++;
+ 
+     client.write("1");
+     
+    // println("threadrunning: " + " " + threadCount);
+  
+ if (client.available() > 0) { 
+   
+   
+   println("Connected");
+//connected = true;
+  }
+  
+   else if(client.available()<1){
+    
+    println("Not Connected");
+    
+  }
+
+  thread("checkConnection");
   
 }
